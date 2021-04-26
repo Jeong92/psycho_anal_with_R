@@ -19,7 +19,7 @@ gaming_data %>%
 # visualize relationship
 gaming_data %>% 
 select('InterRelationship.total', 'Mot.aggresive', 'Mot.escapism', 'Mot.achivement', 'K_scale_sum') %>% 
-  pairs.panels()
+  pairs.panels(lm=TRUE, stars=TRUE)
 
 # write model
 mod1 <- "# a path
@@ -56,7 +56,6 @@ parameterestimates(fsem1, boot.ci.type = "bca.simple", standardized = TRUE) %>%
 # Test same model using mediation() from MBESS
 with(gaming_data, mediations(x = InterRelationship.total, mediator = Mot.escapism, dv = K_scale_sum,
                            bootstrap = TRUE, which.boot = "BCa", B = 5000))
-
 
 # Test the same model using mediate() from psych
 mediate(K_scale_sum ~ InterRelationship.total + (Mot.escapism) + (Mot.aggresive) + (Mot.achivement), data = gaming_data, n.iter = 10000) %>%
